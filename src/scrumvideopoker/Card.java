@@ -9,14 +9,13 @@ public class Card {
 		this.suit = suit;
 	}
 	
-	//Retunera värdet för krotet
+	//Returnera värdet för krotet
 	public int getValue() {
 		return this.value;
 	}
 	
-	//Retunera färgen för kortet
+	//Returnera färgen för kortet
 	public Suit getSuit() {
 		return this.suit;
-
 	}
 }
