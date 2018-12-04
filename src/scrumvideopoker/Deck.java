@@ -21,8 +21,8 @@ public class Deck {
     // printDeck skriver ut hela kortleken	
 	public void printDeck() {
 		for(int i = 0; i < deck.size(); i++) {
-			shuffle();
-			System.out.println(deck.get(i).getValue() + " " + deck.get(i).getSuit().getSymbol());
+//			shuffle();
+			System.out.println(deck.get(i).toString());
 		}
 	}
 	
