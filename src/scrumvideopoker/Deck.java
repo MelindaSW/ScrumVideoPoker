@@ -19,9 +19,19 @@ public class Deck {
 		}
 	}
 	
+    // printDeck skriver ut hela kortleken	
+	public void printDeck() {
+		for(int i = 0; i < deck.size(); i++) {
+//			shuffle();
+			System.out.println(deck.get(i).toString());
+		}
+	}
+	
     //Dra kortet från arraylisten med hjälp av en varibel i blackjack klassen som håller koll på vart vi är
-	public Card draw(int i) {
-	return this.deck.get(i);
+	public Card draw() {
+		Card card = deck.get(deck.size() - 1);
+		deck.remove(deck.size() - 1);
+		return card;
 	}
 	
 	// Här använder vi oss av en färdig klass och klassmetod Collections.shuffle
