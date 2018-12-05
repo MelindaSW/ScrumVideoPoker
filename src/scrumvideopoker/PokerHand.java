@@ -30,14 +30,17 @@ public class PokerHand {
 			else if (flush(hand) == true) {
 				return "Flush";
 			}
-			else if (fullHouse(hand)) {
+			else if (fullHouse(hand) == true) {
 				return "Full House";
 			}
-			else if (straightFlush(hand)) {
+			else if (straightFlush(hand) == true) {
 				return "Straight Flush";
 			}
+			else if (royalFlush(hand) == true) {
+				return "Royal Straight Flush";
+			}
 			else {
-				return null;
+				return "No hands";
 			}
 		}
 	
@@ -88,6 +91,11 @@ public class PokerHand {
 	
 	private boolean straightFlush(ArrayList<Card> hand) {
 //		Five cards in a sequence, all in the same suit. 
+		return true;
+	}
+	
+	private boolean royalFlush(ArrayList<Card> hand) {
+//		A, K, Q, J, 10, all the same suit. 
 		return true;
 	}
 }
