@@ -42,48 +42,60 @@ public class Videopoker {
 	
 
 //	Holdar de kort som spelaren önskar. Dealar efter att önskade kort har holdats.
+//	@SuppressWarnings("null")
 	public void holdAndDeal() {
 		System.out.println("Which cards do you want to hold?");
-		Scanner sc = new Scanner(System.in);
-//		String input = sc.nextLine();
-//		String[] separator = input.split(" ");
-		boolean done = false;
-		while(!done) {
-			if (sc.nextInt() == 0) {
-				done = true;
-			}
-			System.out.println("Hej");
-			Card card = hand1.get(sc.nextInt() - 1);
-			hand2.add(card);
-			
-
-				
-		}
-		System.out.println("Hejdå");
+//		Scanner sc = new Scanner(System.in);
+////		String input = sc.nextLine();
+////		String[] separator = input.split(" ");
+//		boolean done = false;
+//		while(!done) {
+//			if (sc.nextInt() == 0) {
+//				done = true;
+//			}
+//			System.out.println("Hej");
+//			Card card = hand1.get(sc.nextInt() - 1);
+//			hand2.add(card);
+//			
+//
+//				
+//		}
+//		System.out.println("Hejdå");
 
 		
 //		Förslag på lösning: / Melinda
-//		Scanner sc  = new Scanner(System.in);
-//		String input = sc.nextLine();
-//		
-//		String[] separateInput = input.split(" ");
-//		
-////		Parsa stringarrayen till en intarray
-//		int[] separatorInts = null;
-//		
-//		try {
-//			for (int i = 0; i < separateInput.length - 1; i++) {
-//					separatorInts[i] = Integer.parseInt(separateInput[i]);
-//				}
-//		}
-//		catch (NumberFormatException e) {
-//			System.out.println("Ogiltigt värde i inputen.");
-//		}
-//		
-//		for (int s : separatorInts) {
-//			Card card = hand.get(s);
-//			hand2.add(card);
-//		}
+		Scanner sc  = new Scanner(System.in);
+		String input = sc.nextLine();
+		
+		String[] separateInput = input.split(" ");
+		
+//		Parsa stringarrayen till en intarray
+		Integer[] separatorInts = null;
+		
+		try {
+		 separatorInts = new Integer[separateInput.length];
+		
+			for (int i = 0; i < separateInput.length; i++) {
+					separatorInts[i] = Integer.parseInt(separateInput[i]);
+			}
+
+			for (Integer s : separatorInts) {
+				hand2.add(hand1.get(s-1));
+			}
+		}
+		catch (NullPointerException e) {
+			System.out.println("Fel input");
+		}
+		catch (NumberFormatException a) {
+			System.out.println("Inputen innehåller en symbol som inte matchar med kortnumren.");
+		}
+		catch (IndexOutOfBoundsException g) {
+			System.out.println("Ett eller flera värden är för höga eller för låga.");
+		}
+		
+		
+		
+		sc.close();
 	}
 	
 
