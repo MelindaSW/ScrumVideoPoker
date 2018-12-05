@@ -6,8 +6,9 @@ public enum Suit {
 	
 	public final char symbol;
 	
-	Suit(char symbol) {
-		this.symbol = symbol;
+	Suit(char c) { 
+		this.symbol = c;
+ 
 	}
 	
 	public char getSymbol() {

@@ -9,7 +9,6 @@ public class Deck {
 	
 
 	ArrayList<Card> deck = new ArrayList<>();
-	ArrayList<Card> hand = new ArrayList<>();
 	
 	public Deck() {
         //Här skapas totalt 52 kort men 12 av varje Suits.
@@ -45,9 +44,5 @@ public class Deck {
 	public void shuffle() {
 		Collections.shuffle(this.deck);
 	}
-	
 
-	
-
-	
 }
