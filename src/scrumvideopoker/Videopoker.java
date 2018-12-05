@@ -41,10 +41,22 @@ public class Videopoker {
 	public void holdAndDeal() {
 		System.out.println("Which cards do you want to hold?");
 		Scanner sc = new Scanner(System.in);
-		while(sc.hasNext()) {
+//		String input = sc.nextLine();
+//		String[] separator = input.split(" ");
+		boolean done = false;
+		while(!done) {
+			if (sc.nextInt() == 0) {
+				done = true;
+			}
+			System.out.println("Hej");
 			Card card = hand1.get(sc.nextInt() - 1);
 			hand2.add(card);
+			
+
+				
 		}
+		System.out.println("Hejdå");
+
 		
 		
 	}
