@@ -7,7 +7,6 @@ import java.util.Collections;
 public class Deck {
 	
 	ArrayList<Card> deck = new ArrayList<>();
-	ArrayList<Card> hand = new ArrayList<>();
 	
 	public Deck() {
         //Här skapas totalt 52 kort men 12 av varje Suits.
@@ -21,8 +20,8 @@ public class Deck {
 	
     // printDeck skriver ut hela kortleken	
 	public void printDeck() {
+		shuffle();
 		for(int i = 0; i < deck.size(); i++) {
-//			shuffle();
 			System.out.println(deck.get(i).toString());
 		}
 	}
@@ -38,16 +37,6 @@ public class Deck {
     // klassmetoden slumpar decken vi har skapat.
 	public void shuffle() {
 		Collections.shuffle(this.deck);
-	}
-	
-//	Lägger till 5 kort till starthanden
-	public void starterHand() {
-		
-	}
-	
-//	Holdar de kort som spelaren önskar. Dealar efter att önskade kort har holdats.
-	public void holdAndDeal() {
-		
 	}
 	
 }
