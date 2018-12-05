@@ -19,7 +19,7 @@ public class Deck {
 			this.deck.add(new Card(i, Suit.SPADES));
 		}
 	}
-	
+
 	
     // printDeck skriver ut hela kortleken	
 	public void printDeck() {
