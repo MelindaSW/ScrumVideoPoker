@@ -4,8 +4,10 @@ package scrumvideopoker;
 import java.util.ArrayList;
 import java.util.Collections;
 
+
 public class Deck {
 	
+
 	ArrayList<Card> deck = new ArrayList<>();
 	
 	public Deck() {
@@ -18,13 +20,16 @@ public class Deck {
 		}
 	}
 	
+	
     // printDeck skriver ut hela kortleken	
 	public void printDeck() {
 		shuffle();
 		for(int i = 0; i < deck.size(); i++) {
 			System.out.println(deck.get(i).toString());
 		}
+		System.out.println(deck.size());
 	}
+	
 	
     //Dra kortet från arraylisten med hjälp av en varibel i blackjack klassen som håller koll på vart vi är
 	public Card draw() {
@@ -35,6 +40,7 @@ public class Deck {
 	
 	// Här använder vi oss av en färdig klass och klassmetod Collections.shuffle
     // klassmetoden slumpar decken vi har skapat.
+	
 	public void shuffle() {
 		Collections.shuffle(this.deck);
 	}
