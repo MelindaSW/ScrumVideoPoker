@@ -52,11 +52,17 @@ public class PokerHand {
 //		Two cards of the same rank. 
 //		Points only if jacks or better.
 
+		
+	
+
+		
 		return true;
 	}
 	
 	private boolean twoPair(ArrayList<Card> hand) {
 //		Two different pairs. 
+		
+		
 		return true;
 	}
 
@@ -98,4 +104,6 @@ public class PokerHand {
 //		A, K, Q, J, 10, all the same suit. 
 		return true;
 	}
+	
+	
 }
