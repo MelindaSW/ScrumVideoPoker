@@ -3,6 +3,7 @@ package scrumvideopoker;
 import java.util.ArrayList;
 
 public class PokerHand {
+
 	
 	
 	public PokerHand() {
@@ -74,6 +75,59 @@ public class PokerHand {
 				return false;
 			}
 
+	}
+	
+//	
+	private int equalsTest1(ArrayList<Card> hand) {
+		int ecc1 = 0;
+		if (par) {
+			ecc1 = 2;
+		}
+		else if (triss) {
+			ecc1 = 3;
+		}
+		else if (fyrtal) {
+			ecc1 = 4;
+		}
+		else 
+			ecc1 = 0;
+		
+		return ecc1;
+	}
+	
+//	Exkludera kontrollerade kort och flytta över ej kontrollerade kort till newHand
+	
+	private int equalsTest2(ArrayList<Card> hand) {
+		int ecc2 = 0;
+		if (par) {
+			ecc2 = 2;
+		}
+		else if (triss) {
+			ecc2 = 3;
+		}
+		else
+			ecc2 = 0;
+		return ecc2;
+	}
+	
+	private String equalsResult() {
+		
+		int ecc1 = this.equalsTest1();
+		int ecc2 = this.equalsTest2();
+		
+		if (ecc1 == 2 && ecc2 == 0  ||  ecc1 == 0 && ecc2 == 2) {
+			return "Par";
+		}
+		else if (ecc1 == 2  &&  ecc2 == 2) {
+			return "Två par";
+		}
+		else if (ecc1 == 3 && ecc2 == 2  ||  ecc1 == 2 && ecc2 == 3) {
+			return "Kåk";
+		}
+		else if (ecc1 == 4) {
+			return "Fyrtal";
+		}
+		
 	}
 	
 	private boolean twoPair(ArrayList<Card> hand) {
