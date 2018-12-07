@@ -9,7 +9,6 @@ public class PokerHand {
 		
 	}
 	
-	
 	public String decidePokerHand(ArrayList<Card> hand) {
 
 			if (pair(hand) == true) {
@@ -44,19 +43,37 @@ public class PokerHand {
 			}
 		}
 	
+	
+	
 //	Att göra: lägg in algoritmer i metoderna som kollar om handarraylisten stämmer med villkoren för varje 
 //	enskild poker hand. 
 //	Metoderna nedan bör returnera true om det stämmer att Pokerhanden matchar. Returnera false om det inte stämmer. 
+	
+	public boolean checkJacksOrBetterInPair() {
+		return true;
+	}
 	
 	private boolean pair(ArrayList<Card> hand) {
 //		Two cards of the same rank. 
 //		Points only if jacks or better.
 
+		int equalCardCounter = 0;
 		
-	
+		for (Card card : hand) {
+			
+			for (int i = 1; i < hand.size() - 1; i++) {
+				if (card.getValue() == hand.get(i).getValue()) {
+					equalCardCounter += 1;
+				}
+			}
+		}
+			if (equalCardCounter == 2) {
+				return true;
+			}
+			else {
+				return false;
+			}
 
-		
-		return true;
 	}
 	
 	private boolean twoPair(ArrayList<Card> hand) {
@@ -69,12 +86,46 @@ public class PokerHand {
 	
 	private boolean threeOfAKind(ArrayList<Card> hand) {
 //	Three cards of the same rank. 
-		return true;
+		int equalCardCounter = 0;
+		
+		for (Card card : hand) {
+			
+			for (int i = 1; i < hand.size() - 1; i++) {
+				if (card.getValue() == hand.get(i).getValue()) {
+					equalCardCounter += 1;
+				}
+			}
+		}
+		
+			if (equalCardCounter == 3) {
+				return true;
+			}
+			else {
+				return false;
+			}
+			
 	}
 	
 	private boolean fourOfAKind(ArrayList<Card> hand) {
 //		Four cards of the same rank. 
-		return true;
+		int equalCardCounter = 0;
+		
+		for (Card card : hand) {
+			
+			for (int i = 1; i < hand.size() - 1; i++) {
+				if (card.getValue() == hand.get(i).getValue()) {
+					equalCardCounter += 1;
+				}
+			}
+		}
+		
+			if (equalCardCounter == 4) {
+				return true;
+			}
+			else {
+				return false;
+			}	
+	
 	}
 	
 	private boolean straight(ArrayList<Card> hand) {
@@ -94,7 +145,6 @@ public class PokerHand {
 		return true;
 	}
 
-	
 	private boolean straightFlush(ArrayList<Card> hand) {
 //		Five cards in a sequence, all in the same suit. 
 		return true;
