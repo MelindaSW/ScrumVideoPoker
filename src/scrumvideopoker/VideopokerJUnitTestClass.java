@@ -1,5 +1,6 @@
 package scrumvideopoker;
 
+import static org.junit.Assert.assertSame;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -103,14 +104,16 @@ public class VideopokerJUnitTestClass {
 	
 	@Test
 	public void testIfFlush() {
+		PokerHand pk = new PokerHand();
+		testArray = new ArrayList<>();
 		
 		testArray.add(new Card(5, Suit.HEARTS));
-		testArray.add(new Card(6, Suit.CLUBS));
-		testArray.add(new Card(7, Suit.HEARTS));
-		testArray.add(new Card(8, Suit.DIAMONDS));
-		testArray.add(new Card(9, Suit.CLUBS));
+		testArray.add(new Card(6, Suit.HEARTS));
+		testArray.add(new Card(4, Suit.HEARTS));
+		testArray.add(new Card(8, Suit.HEARTS));
+		testArray.add(new Card(9, Suit.HEARTS));
 		
-		assertEquals("Flush", ph.decidePokerHand(testArray));
+		assertEquals("Flush",ph.decidePokerHand(testArray));
 		
 	}
 	
