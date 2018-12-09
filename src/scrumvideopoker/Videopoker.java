@@ -74,5 +74,13 @@ public class Videopoker {
 		sc.close();
 	}
 	
+	
+//	Förslag:
+//	Använd den här metoden för att räkna ut score. Tar emot parametrar för vilken pokerhand 
+//	samt vilken bet-nivå poängen ska baseras på
+	public int score(String ph, int bet) {
+		return 0;
+	}
+	
 
 }

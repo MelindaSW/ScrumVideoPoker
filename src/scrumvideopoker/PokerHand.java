@@ -2,153 +2,195 @@ package scrumvideopoker;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.NavigableSet;
-import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collector;
 
 public class PokerHand {
 	
-	Card c = new Card();
-	
-//	En navigableSet tar både bort dubletter och sorterar innehållet.
+
+	//	En navigableSet tar både bort dubletter och sorterar innehållet.
 //	Används i sortHand metoden.
 	NavigableSet<Integer> nSet;
 	
 	List<Integer> aList;
 	
 	public String getPokerHand(ArrayList<Card> hand) {
-
-			if (evaluateHand(hand) == 4) {
+			
+			switch (evaluateHand(hand)) {
+			
+			case "Pair": 
 				return "Pair";
-			}
-			else if (evaluateHand(hand) == 3) {
-				return "Two Pair";
-			}
-			else if (evaluateHand(hand) == 3) {
-				return "Three of a Kind";
-			}
-			else if (evaluateHand(hand) == 2) {
-				return "Four of a Kind";
-			}
-			else if (straight(hand)) {
 				
-				if (straightFlush(hand)) {
-					return "Straight Flush";
-				}
-				else {
-					return "Straight";
-				}
-			}
-			else if (flush(hand)) {
+			case "Pair with Jacks or better":
+				return "Pair with Jacks or better";
+				
+			case "Two pair": 
+				return "Two pair";
+				
+			case "Three of a kind": 
+				return "Three of a kind";
+				
+			case "Four of a kind": 
+				return "Four of a kind";
+				
+			case "Straight flush": 
+				return "Straight flush";
+				
+			case "Straight": 
+				return "Straight";
+				
+			case "Flush": 
 				return "Flush";
-			}
-			else if (evaluateHand(hand) == 2) {
-				return "Full House";
-			}
-			else if (straightFlush(hand) == true) {
-				return "Straight Flush";
-			}
-			else if (evaluateHand(hand) == 0) {
-				return "Royal Flush";
-			}
-			else {
+				
+			case "Full house": 
+				return "Full house";
+				
+			case "Royal flush": 
+				return "Royal flush";
+				
+			case "No hand": 
 				return "No hand";
 			}
+			
+			return "Something went wrong";
 		}
 	
 	
-//	public boolean checkJacksOrBetterInPair() {
-//		return true;
-//	}
 	
 	
-//	Sortera arrayen, gör om till HashSet. Jämför strl på hash set. 
-//	Om 4 = 1par.
-//	Om 3 = triss eller 2 par. 
-//	Om 2 = fyrtal eller kåk.
-//	Om 5 = Inget av det ovan. 
 	
-	
-	private int evaluateHand(ArrayList<Card> hand) {
+	private String evaluateHand(ArrayList<Card> hand) {
+
+//		Här får vi en ny sorterad lista med och borttagna dubletter baserat på innehållet i arraylistan. 
+		List<Integer> s = sortHandAndRemoveDuplicates(hand);
 		
-//		Two cards of the same rank. 
-//		Points only if jacks or better.
+//		Med hjälp av den nya listans storlek (s.size()) kan vi dra följande slutsats:
+//		Om 4 = 1par.
+//		Om 3 = triss eller 2 par. 
+//		Om 2 = fyrtal eller kåk.
+//		Om 5 = Inget av det ovan. = antingen no hand eller straight, straight flush eller royalFlush.
+//		Om ingen hand matchar returneras "No hand"
 		
-		switch (sortHand(hand).size()) {
-			case 4: return 4; 
+		switch (s.size()) {
+		
+//		Är storleken 4 så är det ett par det handlar om. 
+//		Här kollas också om värdet på paret är jacks or better med hjälp av metoden längst ner i klassen. 
+			case 4: 
+				
+				if (checkJacksOrBetterInPair(hand)) {
+
+					return "Pair with Jacks or better";
+				}
+				else {
+					
+					return "Pair"; 
+				}
+				
+//			Om storleken matchar med 3 kontrolleras först om det är tretal. Handen sorteras först. 
+//			Tretalet kan då hamna i rad på tre olika positioner i listan, beroende på storleken.
+//			Vi kollar om det mittersta kortet matchar med de två till höger, de två till vänster och 
+//			till slut med de två på var sida om mitten. 
+//			Om inget av detta stämmer så returneras istället 2 par. 
 			case 3: 
-//		Lägg till if om triss eller 2 par
 				
-				return 3;
-//				Lägg till if om fyrtal eller kåk
+				Collections.sort(hand);
 				
-			case 2: return 2; 
-			default: return 5; 
+				if (   hand.get(2).getValue().equals(hand.get(3).getValue())
+					&& hand.get(2).getValue().equals(hand.get(4).getValue())
+					||
+					   hand.get(2).getValue().equals(hand.get(1).getValue())
+					&& hand.get(2).getValue().equals(hand.get(0).getValue())
+					||
+					   hand.get(2).getValue().equals(hand.get(1).getValue())
+					&& hand.get(2).getValue().equals(hand.get(3).getValue())) {
+					
+					return "Three of a kind";
+				}
+				else {
+					
+					return "Two pair";
+				}
+				
+//			Här gäller samma princip som för tretal. Med skillnaden att fyrtal bara har två möjliga 
+//			positioner. Stämmer inte det med fyrtal så är det en kåk. 
+			case 2:
+				
+				Collections.sort(hand);
+				
+				if (   hand.get(2).getValue().equals(hand.get(1).getValue())
+					&& hand.get(2).getValue().equals(hand.get(3).getValue())
+					&& hand.get(2).getValue().equals(hand.get(4).getValue())
+					|| 
+					   hand.get(2).getValue().equals(hand.get(0).getValue())
+					&& hand.get(2).getValue().equals(hand.get(1).getValue())
+					&& hand.get(2).getValue().equals(hand.get(3).getValue())) {
+					
+					return "Four of a kind"; 
+				}
+				else {
+					
+					return "Full house";
+				}
+
+//			Om storleken på listan är 5 kan vi dra slutsatsen att den består av nedan beskrivna poker hands.
+//			Alternativet är också att handen inte har något värde alls = defaultvärdet.  
+				
+//			Här använder vi oss av den lista som vi får av metoden sortHandAndRemoveDuplicates()
+//			Om värdet på plats 1, 2, 3, 4 stämmer överrens med det första värdet som adderas med 
+//			1, 2. 3 respektive 4 så är det en stege. Om dessutom alla suits stämmer överrens med 
+//			så är det en Straight flush. Och så vidare.
+			
+			case 5: 
+
+				int o = (int) s.get(0);
+				
+				if  (  s.get(1).equals(o + 1) 
+					&& s.get(2).equals(o + 2)
+					&& s.get(3).equals(o + 3) 
+					&& s.get(4).equals(o + 4)
+					&& hand.get(0).getSuit() == hand.get(1).getSuit() 
+					&& hand.get(0).getSuit() == hand.get(2).getSuit()
+					&& hand.get(0).getSuit() == hand.get(3).getSuit()
+				    && hand.get(0).getSuit() == hand.get(4).getSuit()) {
+					
+					return "Straight flush";
+				}
+				else if (  s.get(1).equals(o + 1) 
+						&& s.get(2).equals(o + 2)
+						&& s.get(3).equals(o + 3) 
+						&& s.get(4).equals(o + 4)) {
+						
+					return "Straight";
+				}
+				else if (  hand.get(0).getSuit() == hand.get(1).getSuit() 
+						&& hand.get(0).getSuit() == hand.get(2).getSuit()
+						&& hand.get(0).getSuit() == hand.get(3).getSuit()
+						&& hand.get(0).getSuit() == hand.get(4).getSuit()
+						&& s.get(0).equals(1)
+						&& s.get(1).equals(10)
+						&& s.get(2).equals(11)
+						&& s.get(3).equals(12)
+						&& s.get(4).equals(13)) {
+					
+					return "Royal flush";
+				}
+				else if (  hand.get(0).getSuit() == hand.get(1).getSuit() 
+						&& hand.get(0).getSuit() == hand.get(2).getSuit()
+						&& hand.get(0).getSuit() == hand.get(3).getSuit()
+						&& hand.get(0).getSuit() == hand.get(4).getSuit()) {
+					
+					return "Flush";
+				}
+				
+			default: return "No hand"; 
 		}
 		
 	}
 
 	
-	private boolean straight(ArrayList<Card> hand) {
-//		Sortera arrayen först! 
-//		Five cards in a sequence, but not of the same suit. 
-		List<Integer> s = sortHand(hand);
-	
-		int o = (int) s.get(0);
-//		
-		if(s.get(1).equals(o+1) && s.get(2).equals(o+2)
-			&& s.get(3).equals(o+3) && s.get(4).equals(o+4)) {
-			
-			return true;
-		}
-		else {
-			
-			return false;
-		}
-	}
-	
-	private boolean straightFlush(ArrayList<Card> hand) {
-//		Five cards in a sequence, all in the same suit. 
-		
-//		List s = makeTreeSet(hand);
-		List<Integer> s = sortHand(hand);
-		
-		int o = (int) s.get(0);
-		
-		if 	(s.get(1).equals(o+1) && s.get(2).equals(o+2)
-				&& s.get(3).equals(o+3) && s.get(4).equals(o+4)
-				&&hand.get(0).getSuit() == hand.get(1).getSuit() 
-				&& hand.get(0).getSuit() == hand.get(2).getSuit()
-				&& hand.get(0).getSuit() == hand.get(3).getSuit()
-				&& hand.get(0).getSuit() == hand.get(4).getSuit()) {
-			
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	
-	
-	private boolean flush(ArrayList<Card> hand) {
-		
-//		Any five cards of the same suit, but not in a sequence. 
-		if (hand.get(0).getSuit() == hand.get(1).getSuit() 
-			&& hand.get(0).getSuit() == hand.get(2).getSuit()
-			&& hand.get(0).getSuit() == hand.get(3).getSuit()
-			&& hand.get(0).getSuit() == hand.get(4).getSuit()) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	
-	
-	 List<Integer> sortHand(ArrayList<Card> hand) {
+//	Metoden tar hand listan som parameter och returnerar en sorterad arraylist med dubletter/tripletter etc borttagna. 
+	List<Integer> sortHandAndRemoveDuplicates(ArrayList<Card> hand) {
 		
 //		Ett TreeSet av typen NavigableSet:
 		nSet = new TreeSet<>();
@@ -156,7 +198,7 @@ public class PokerHand {
 //		En ArrayList av typen List:
 		aList = new ArrayList<>();
 		
-//		Innehållet i hand läggs till i ett set. Den både sorterar dem i storleksordning (descending)
+//		Innehållet i hand läggs till i ett set. Den både sorterar dem i storleksordning (minsta värdet först).
 //		samt tar bort dubletter och tripletter. 
 //		Om inga dubletter finns så blir storleken densamma som från början.
 		
@@ -164,7 +206,7 @@ public class PokerHand {
 			nSet.add(hand.get(i).getValue());
 		}
 		
-//		Lägger till innehållet i den nu sorterade listan som metoden returnerar. 
+//		Lägger till innehållet i nSet i aList som metoden sen returnerar. 
 		for (Integer i : nSet) {
 			aList.add(i);
 		}
@@ -172,5 +214,30 @@ public class PokerHand {
 		return aList;
 		
 	}
+
+	
+//	Metoden returnerar true om paret har värdet 11 eller mer. 
+//	Först itererar den igenom handen till dess den kommer till de två korten 
+//	som liknar varandra. Därefter kollar den om värdet på de två korten är högre än 
+//	10 eller lika med 1 (ace). Om det stämmer så returneras true. Annars returneras false. 
+	boolean checkJacksOrBetterInPair(ArrayList<Card> hand) {
+		
+		Collections.sort(hand);
+		int count = 1;
+		
+		for (int i = 0; i < hand.size() -1; i++) {
+			
+			if (hand.get(i).getValue() == hand.get(count).getValue()) {
+				
+				if (hand.get(count).getValue() >= 11 || hand.get(count).getValue() == 1) {
+					
+					return true;
+				}
+				count++;
+			}
+		}
+		return false;
+	}
+	
 	
 }
