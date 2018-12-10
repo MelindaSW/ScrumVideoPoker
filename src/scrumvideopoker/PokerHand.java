@@ -7,6 +7,7 @@ import java.util.NavigableSet;
 import java.util.TreeSet;
 
 public class PokerHand {
+
 	
 
 	//	En navigableSet tar både bort dubletter och sorterar innehållet.
@@ -71,6 +72,7 @@ public class PokerHand {
 //		Om 2 = fyrtal eller kåk.
 //		Om 5 = Inget av det ovan. = antingen no hand eller straight, straight flush eller royalFlush.
 //		Om ingen hand matchar returneras "No hand"
+	
 		
 		switch (s.size()) {
 		
