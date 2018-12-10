@@ -13,8 +13,6 @@ public class PokerHand {
 
 	List<Integer> aList;
 
-	public void decidePokerHand(ArrayList<Card> hand) {
-	}
 	public String getPokerHand(ArrayList<Card> hand) {
 
 		switch (evaluateHand(hand)) {
@@ -82,6 +80,7 @@ public class PokerHand {
 			if (checkJacksOrBetterInPair(hand)) {
 
 				return "Pair with Jacks or better";
+				
 			} else {
 
 				return "Pair";
@@ -96,14 +95,15 @@ public class PokerHand {
 
 			Collections.sort(hand);
 
-			if (hand.get(2).getValue().equals(hand.get(3).getValue())
-					&& hand.get(2).getValue().equals(hand.get(4).getValue())
-					|| hand.get(2).getValue().equals(hand.get(1).getValue())
-							&& hand.get(2).getValue().equals(hand.get(0).getValue())
-					|| hand.get(2).getValue().equals(hand.get(1).getValue())
-							&& hand.get(2).getValue().equals(hand.get(3).getValue())) {
+			if (   hand.get(2).getValue().equals(hand.get(3).getValue())
+				&& hand.get(2).getValue().equals(hand.get(4).getValue())
+				|| hand.get(2).getValue().equals(hand.get(1).getValue())
+				&& hand.get(2).getValue().equals(hand.get(0).getValue())
+				|| hand.get(2).getValue().equals(hand.get(1).getValue())
+				&& hand.get(2).getValue().equals(hand.get(3).getValue())) {
 
 				return "Three of a kind";
+				
 			} else {
 
 				return "Two pair";
@@ -115,12 +115,12 @@ public class PokerHand {
 
 			Collections.sort(hand);
 
-			if (hand.get(2).getValue().equals(hand.get(1).getValue())
-					&& hand.get(2).getValue().equals(hand.get(3).getValue())
-					&& hand.get(2).getValue().equals(hand.get(4).getValue())
-					|| hand.get(2).getValue().equals(hand.get(0).getValue())
-							&& hand.get(2).getValue().equals(hand.get(1).getValue())
-							&& hand.get(2).getValue().equals(hand.get(3).getValue())) {
+			if (   hand.get(2).getValue().equals(hand.get(1).getValue())
+				&& hand.get(2).getValue().equals(hand.get(3).getValue())
+			    && hand.get(2).getValue().equals(hand.get(4).getValue())
+				|| hand.get(2).getValue().equals(hand.get(0).getValue())
+				&& hand.get(2).getValue().equals(hand.get(1).getValue())
+				&& hand.get(2).getValue().equals(hand.get(3).getValue())) {
 
 				return "Four of a kind";
 			} else {
@@ -140,23 +140,38 @@ public class PokerHand {
 
 			int o = (int) s.get(0);
 
-			if (s.get(1).equals(o + 1) && s.get(2).equals(o + 2) && s.get(3).equals(o + 3) && s.get(4).equals(o + 4)
-					&& hand.get(0).getSuit() == hand.get(1).getSuit() && hand.get(0).getSuit() == hand.get(2).getSuit()
-					&& hand.get(0).getSuit() == hand.get(3).getSuit()
-					&& hand.get(0).getSuit() == hand.get(4).getSuit()) {
+			if (   s.get(1).equals(o + 1) 
+				&& s.get(2).equals(o + 2) 
+			    && s.get(3).equals(o + 3) 
+				&& s.get(4).equals(o + 4)
+				&& hand.get(0).getSuit() == hand.get(1).getSuit() 
+				&& hand.get(0).getSuit() == hand.get(2).getSuit()
+				&& hand.get(0).getSuit() == hand.get(3).getSuit()
+				&& hand.get(0).getSuit() == hand.get(4).getSuit()) {
 
 				return "Straight flush";
-			} else if (s.get(1).equals(o + 1) && s.get(2).equals(o + 2) && s.get(3).equals(o + 3)
+				
+			} else if (s.get(1).equals(o + 1) 
+					&& s.get(2).equals(o + 2) 
+					&& s.get(3).equals(o + 3)
 					&& s.get(4).equals(o + 4)) {
 
 				return "Straight";
-			} else if (hand.get(0).getSuit() == hand.get(1).getSuit() && hand.get(0).getSuit() == hand.get(2).getSuit()
-					&& hand.get(0).getSuit() == hand.get(3).getSuit() && hand.get(0).getSuit() == hand.get(4).getSuit()
-					&& s.get(0).equals(1) && s.get(1).equals(10) && s.get(2).equals(11) && s.get(3).equals(12)
+				
+			} else if (hand.get(0).getSuit() == hand.get(1).getSuit() 
+					&& hand.get(0).getSuit() == hand.get(2).getSuit()
+					&& hand.get(0).getSuit() == hand.get(3).getSuit() 
+					&& hand.get(0).getSuit() == hand.get(4).getSuit()
+					&& s.get(0).equals(1) 
+					&& s.get(1).equals(10) 
+					&& s.get(2).equals(11) 
+					&& s.get(3).equals(12)
 					&& s.get(4).equals(13)) {
 
 				return "Royal flush";
-			} else if (hand.get(0).getSuit() == hand.get(1).getSuit() && hand.get(0).getSuit() == hand.get(2).getSuit()
+				
+			} else if (hand.get(0).getSuit() == hand.get(1).getSuit() 
+					&& hand.get(0).getSuit() == hand.get(2).getSuit()
 					&& hand.get(0).getSuit() == hand.get(3).getSuit()
 					&& hand.get(0).getSuit() == hand.get(4).getSuit()) {
 
@@ -194,7 +209,6 @@ public class PokerHand {
 		return aList;
 
 	}
-
 
 //	Metoden returnerar true om paret har värdet 11 eller mer. 
 //	Först itererar den igenom handen till dess den kommer till de två korten 
