@@ -61,14 +61,6 @@ public class PokerHand {
 //	enskild poker hand. 
 //	Metoderna nedan bör returnera true om det stämmer att Pokerhanden matchar. Returnera false om det inte stämmer. 
 
-	private boolean pair(ArrayList<Card> hand) {
-//		Two cards of the same rank. 
-//		Points only if jacks or better.
-
-		return true;
-	}
-
-
 
 	private String evaluateHand(ArrayList<Card> hand) {
 
@@ -203,42 +195,7 @@ public class PokerHand {
 
 	}
 
-	private boolean threeOfAKind(ArrayList<Card> hand) {
-//	Three cards of the same rank. 
-		return true;
-	}
 
-	private boolean fourOfAKind(ArrayList<Card> hand) {
-//		Four cards of the same rank. 
-		return true;
-	}
-
-	private boolean straight(ArrayList<Card> hand) {
-
-//		Five cards in a sequence, but not of the same suit. 
-		return true;
-	}
-
-	private boolean flush(ArrayList<Card> hand) {
-
-//		Any five cards of the same suit, but not in a sequence. 
-		return true;
-	}
-
-	private boolean fullHouse(ArrayList<Card> hand) {
-//		Three of a kind with a pair. 
-		return true;
-	}
-
-	private boolean straightFlush(ArrayList<Card> hand) {
-//		Five cards in a sequence, all in the same suit. 
-		return true;
-	}
-
-	private boolean royalFlush(ArrayList<Card> hand) {
-//		A, K, Q, J, 10, all the same suit. 
-		return true;
-	}
 //	Metoden returnerar true om paret har värdet 11 eller mer. 
 //	Först itererar den igenom handen till dess den kommer till de två korten 
 //	som liknar varandra. Därefter kollar den om värdet på de två korten är högre än 

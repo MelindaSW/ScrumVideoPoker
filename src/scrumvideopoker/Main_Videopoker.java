@@ -15,7 +15,6 @@ public class Main_Videopoker {
 
 		boolean endGame = false;
 		String input = "";			
-		String in = "";
 
 //		Startmeddelande med instruktioner:
 		System.out.println("Welcome to video poker!\nWhen holding cards, enter card numbers (1-5),\nseparate numbers with space.\n"
@@ -48,12 +47,11 @@ public class Main_Videopoker {
 //					helt enkelt skriver ut en ny hand. 
 					try {
 						
-					System.out.println("Which cards do you want to hold?");
+					System.out.println("\nWhich cards do you want to hold?");
 					
-					in = sc.nextLine();
-				
+					sc.nextLine();
 
-					v.holdAndDeal(sc.nextLine());
+					v.holdAndDeal(sc.nextLine()); 
 					v.fillHand2();
 					v.printHand2();
 					System.out.println();					

@@ -46,7 +46,6 @@ public class VideopokerJUnitTestClass  {
 	@Test
 	public void testIfPair() {
 
-		testArray.clear();
 
 		testArray.add(new Card(5, Suit.CLUBS));
 		testArray.add(new Card(6, Suit.DIAMONDS));
@@ -62,7 +61,6 @@ public class VideopokerJUnitTestClass  {
 	@Test
 	public void testIfTwoPair() {
 		
-		testArray.clear();
 
 		testArray.add(new Card(5, Suit.CLUBS));
 		testArray.add(new Card(5, Suit.DIAMONDS));
@@ -78,7 +76,6 @@ public class VideopokerJUnitTestClass  {
 	@Test
 	public void testIfThreeOfAKind() {
 		
-		testArray.clear();
 
 		testArray.add(new Card(5, Suit.CLUBS));
 		testArray.add(new Card(13, Suit.DIAMONDS));
@@ -94,7 +91,6 @@ public class VideopokerJUnitTestClass  {
 	@Test
 	public void testIfFourOfAKind() {
 		
-		testArray.clear();
 		
 		testArray.add(new Card(13, Suit.CLUBS));
 		testArray.add(new Card(13, Suit.DIAMONDS));
@@ -110,7 +106,6 @@ public class VideopokerJUnitTestClass  {
 	@Test
 	public void testIfStraight() {
 		
-		testArray.clear();
 
 		testArray.add(new Card(6, Suit.CLUBS));
 		testArray.add(new Card(5, Suit.DIAMONDS));
@@ -125,21 +120,12 @@ public class VideopokerJUnitTestClass  {
 	
 	@Test
 	public void testIfFlush() {
-		PokerHand pk = new PokerHand();
 		testArray = new ArrayList<>();
 		
-		testArray.clear();
 		
 		testArray.add(new Card(5, Suit.HEARTS));
 		testArray.add(new Card(6, Suit.HEARTS));
 		testArray.add(new Card(4, Suit.HEARTS));
-		testArray.add(new Card(8, Suit.HEARTS));
-		testArray.add(new Card(9, Suit.HEARTS));
-		
-//		assertEquals("Flush",ph.decidePokerHand(testArray));
-		
-		testArray.add(new Card(2, Suit.HEARTS));
-		testArray.add(new Card(7, Suit.HEARTS));
 		testArray.add(new Card(8, Suit.HEARTS));
 		testArray.add(new Card(9, Suit.HEARTS));
 		
@@ -151,7 +137,6 @@ public class VideopokerJUnitTestClass  {
 	@Test
 	public void testIfFullHouse() {
 		
-		testArray.clear();
 
 		testArray.add(new Card(5, Suit.CLUBS));
 		testArray.add(new Card(13, Suit.DIAMONDS));
@@ -167,7 +152,6 @@ public class VideopokerJUnitTestClass  {
 	@Test
 	public void testIfStraightFlush() {
 		
-		testArray.clear();
 		
 		testArray.add(new Card(6, Suit.CLUBS));
 		testArray.add(new Card(5, Suit.CLUBS));
@@ -183,7 +167,6 @@ public class VideopokerJUnitTestClass  {
 	@Test
 	public void testIfRoyalFlush() {
 		
-		testArray.clear();
 		
 		testArray.add(new Card(10, Suit.CLUBS));
 		testArray.add(new Card(11, Suit.CLUBS));
@@ -198,7 +181,7 @@ public class VideopokerJUnitTestClass  {
 	
 	@Test
 	public void testSortHandAndRemoveDuplicatesMethod() {
-		testArray.clear();
+
 		
 		testArray.add(new Card(6, Suit.CLUBS));
 		testArray.add(new Card(8, Suit.CLUBS));
@@ -210,7 +193,7 @@ public class VideopokerJUnitTestClass  {
 		for (Integer n : ph.sortHandAndRemoveDuplicates(testArray)) {
 			System.out.println(n);
 		}
-//		assertTrue(ph.sortHandAndRemoveDuplicates(testArray).size() == 4);
+		assertTrue(ph.sortHandAndRemoveDuplicates(testArray).size() == 4);
 	}
 
 	@Test
@@ -240,7 +223,7 @@ public class VideopokerJUnitTestClass  {
 
 		System.out.println(ph.checkJacksOrBetterInPair(testArray));
 		
-//		assertTrue(ph.checkJacksOrBetterInPair(testArray));
+		assertTrue(ph.checkJacksOrBetterInPair(testArray));
 	}
 	
 	@Test
