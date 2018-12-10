@@ -8,9 +8,7 @@ import java.util.TreeSet;
 
 public class PokerHand {
 
-	
-
-	//	En navigableSet tar både bort dubletter och sorterar innehållet.
+//	En navigableSet tar både bort dubletter och sorterar innehållet.
 //	Används i sortHand metoden.
 	NavigableSet<Integer> nSet;
 	
@@ -72,10 +70,8 @@ public class PokerHand {
 //		Om 2 = fyrtal eller kåk.
 //		Om 5 = Inget av det ovan. = antingen no hand eller straight, straight flush eller royalFlush.
 //		Om ingen hand matchar returneras "No hand"
-	
 		
-		switch (s.size()) {
-		
+			switch (s.size()) {
 //		Är storleken 4 så är det ett par det handlar om. 
 //		Här kollas också om värdet på paret är jacks or better med hjälp av metoden längst ner i klassen. 
 			case 4: 
