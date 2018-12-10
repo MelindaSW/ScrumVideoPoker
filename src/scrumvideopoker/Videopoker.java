@@ -31,7 +31,6 @@ public class Videopoker {
 			hand1.add(d.draw());
 		}
 	}
-	
 
 	public void fillHand2() {
 		d.shuffle();
@@ -42,49 +41,28 @@ public class Videopoker {
 	
 
 //	Holdar de kort som spelaren önskar. Dealar efter att önskade kort har holdats.
-//	@SuppressWarnings("null")
 	public void holdAndDeal() {
-		System.out.println("Which cards do you want to hold?");
-//		Scanner sc = new Scanner(System.in);
-////		String input = sc.nextLine();
-////		String[] separator = input.split(" ");
-//		boolean done = false;
-//		while(!done) {
-//			if (sc.nextInt() == 0) {
-//				done = true;
-//			}
-//			System.out.println("Hej");
-//			Card card = hand1.get(sc.nextInt() - 1);
-//			hand2.add(card);
-//			
-//
-//				
-//		}
-//		System.out.println("Hejdå");
-
 		
-//		Förslag på lösning: / Melinda
+		System.out.println("Which cards do you want to hold?");
+
 		Scanner sc  = new Scanner(System.in);
 		String input = sc.nextLine();
 		
+//		Dela upp inputen med mellanslag som separator. 
 		String[] separateInput = input.split(" ");
-		
 //		Parsa stringarrayen till en intarray
-		Integer[] separatorInts = null;
+		Integer[] separatorInts;
 		
 		try {
 		 separatorInts = new Integer[separateInput.length];
 		
 			for (int i = 0; i < separateInput.length; i++) {
-					separatorInts[i] = Integer.parseInt(separateInput[i]);
+				separatorInts[i] = Integer.parseInt(separateInput[i]);
 			}
 
 			for (Integer s : separatorInts) {
 				hand2.add(hand1.get(s-1));
 			}
-		}
-		catch (NullPointerException e) {
-			System.out.println("Fel input");
 		}
 		catch (NumberFormatException a) {
 			System.out.println("Inputen innehåller en symbol som inte matchar med kortnumren.");
@@ -93,9 +71,15 @@ public class Videopoker {
 			System.out.println("Ett eller flera värden är för höga eller för låga.");
 		}
 		
-		
-		
 		sc.close();
+	}
+	
+	
+//	Förslag:
+//	Använd den här metoden för att räkna ut score. Tar emot parametrar för vilken pokerhand 
+//	samt vilken bet-nivå poängen ska baseras på
+	public int score(String ph, int bet) {
+		return 0;
 	}
 	
 

@@ -1,16 +1,25 @@
 package scrumvideopoker;
-public class Card {
-	private int value;
+
+
+public class Card implements Comparable<Object> {
+	
+//	Klassen implementerar Comparable, vilket gör att dess objekt blir jämförbara med varandra. 
+	
+	private Integer value;
 	private Suit suit;
+	
+	public Card() {
+		
+	}
 
 	//konstruktor för card klassen
-	public Card(int value, Suit suit) {
+	public Card(Integer value, Suit suit) {
 		this.value = value;
 		this.suit = suit;
 	}
 	
 	//Returnera värdet för kortet
-	public int getValue() {
+	public Integer getValue() {
 		return this.value;
 	}
 	
@@ -36,4 +45,11 @@ public class Card {
 		}
 		return this.getValue() + " " + this.suit.getSymbol();
 	}
+
+	@Override
+	public int compareTo(Object o) {
+		Card c = (Card) o;
+		return getValue().compareTo(c.getValue());
+	}
+
 }

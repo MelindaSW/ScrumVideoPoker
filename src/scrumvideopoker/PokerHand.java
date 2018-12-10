@@ -1,163 +1,278 @@
 package scrumvideopoker;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.NavigableSet;
+import java.util.TreeSet;
 
 public class PokerHand {
 
-	
-	
-	public PokerHand() {
-		
+// En navigableSet tar både bort dubletter och sorterar innehållet.
+// Används i sortHand metoden.
+	NavigableSet<Integer> nSet;
+
+	List<Integer> aList;
+
+	public void decidePokerHand(ArrayList<Card> hand) {
+	}
+	public String getPokerHand(ArrayList<Card> hand) {
+
+		switch (evaluateHand(hand)) {
+
+		case "Pair":
+			return "Pair";
+
+		case "Pair with Jacks or better":
+			return "Pair with Jacks or better";
+
+		case "Two pair":
+			return "Two pair";
+
+		case "Three of a kind":
+			return "Three of a kind";
+
+		case "Four of a kind":
+			return "Four of a kind";
+
+		case "Straight flush":
+			return "Straight flush";
+
+		case "Straight":
+			return "Straight";
+
+		case "Flush":
+			return "Flush";
+
+		case "Full house":
+			return "Full house";
+
+		case "Royal flush":
+			return "Royal flush";
+
+		case "No hand":
+			return "No hand";
+		}
+
+		return "Something went wrong";
 	}
 	
-	
-	public String decidePokerHand(ArrayList<Card> hand) {
 
-			if (pair(hand) == true) {
-				return "Pair";
-			}
-			else if (twoPair(hand) == true) {
-				return "Two Pair";
-			}
-			else if (threeOfAKind(hand) == true) {
-				return "Three of a Kind";
-			}
-			else if (fourOfAKind(hand) == true) {
-				return "Four of a Kind";
-			}
-			else if (straight(hand) == true) {
-				return "Straight";
-			}
-			else if (flush(hand) == true) {
-				return "Flush";
-			}
-			else if (fullHouse(hand) == true) {
-				return "Full House";
-			}
-			else if (straightFlush(hand) == true) {
-				return "Straight Flush";
-			}
-			else if (royalFlush(hand) == true) {
-				return "Royal Straight Flush";
-			}
-			else {
-				return "No hands";
-			}
-		}
-	
 //	Att göra: lägg in algoritmer i metoderna som kollar om handarraylisten stämmer med villkoren för varje 
 //	enskild poker hand. 
 //	Metoderna nedan bör returnera true om det stämmer att Pokerhanden matchar. Returnera false om det inte stämmer. 
-	
+
 	private boolean pair(ArrayList<Card> hand) {
 //		Two cards of the same rank. 
 //		Points only if jacks or better.
 
-		
-	
-
-		
 		return true;
 	}
-	
+
 //	
-	private int equalsTest1(ArrayList<Card> hand) {
-		int ecc1 = 0;
-		if (par) {
-			ecc1 = 2;
+//	private int equalsTest1(ArrayList<Card> hand) {
+//		int ecc1 = 0;
+//		if (par) {
+//			ecc1 = 2;
+//		}
+//		else if (triss) {
+//			ecc1 = 3;
+//		}
+//		else if (fyrtal) {
+//			ecc1 = 4;
+//		}
+
+	private String evaluateHand(ArrayList<Card> hand) {
+
+//		Här får vi en ny sorterad lista med och borttagna dubletter baserat på innehållet i arraylistan. 
+		List<Integer> s = sortHandAndRemoveDuplicates(hand);
+
+//		Med hjälp av den nya listans storlek (s.size()) kan vi dra följande slutsats:
+//		Om 4 = 1par.
+//		Om 3 = triss eller 2 par. 
+//		Om 2 = fyrtal eller kåk.
+//		Om 5 = Inget av det ovan. = antingen no hand eller straight, straight flush eller royalFlush.
+//		Om ingen hand matchar returneras "No hand"
+
+		switch (s.size()) {
+
+//		Är storleken 4 så är det ett par det handlar om. 
+//		Här kollas också om värdet på paret är jacks or better med hjälp av metoden längst ner i klassen. 
+		case 4:
+
+			if (checkJacksOrBetterInPair(hand)) {
+
+				return "Pair with Jacks or better";
+			} else {
+
+				return "Pair";
+			}
+
+//			Om storleken matchar med 3 kontrolleras först om det är tretal. Handen sorteras först. 
+//			Tretalet kan då hamna i rad på tre olika positioner i listan, beroende på storleken.
+//			Vi kollar om det mittersta kortet matchar med de två till höger, de två till vänster och 
+//			till slut med de två på var sida om mitten. 
+//			Om inget av detta stämmer så returneras istället 2 par. 
+		case 3:
+
+			Collections.sort(hand);
+
+			if (hand.get(2).getValue().equals(hand.get(3).getValue())
+					&& hand.get(2).getValue().equals(hand.get(4).getValue())
+					|| hand.get(2).getValue().equals(hand.get(1).getValue())
+							&& hand.get(2).getValue().equals(hand.get(0).getValue())
+					|| hand.get(2).getValue().equals(hand.get(1).getValue())
+							&& hand.get(2).getValue().equals(hand.get(3).getValue())) {
+
+				return "Three of a kind";
+			} else {
+
+				return "Two pair";
+			}
+
+//			Här gäller samma princip som för tretal. Med skillnaden att fyrtal bara har två möjliga 
+//			positioner. Stämmer inte det med fyrtal så är det en kåk. 
+		case 2:
+
+			Collections.sort(hand);
+
+			if (hand.get(2).getValue().equals(hand.get(1).getValue())
+					&& hand.get(2).getValue().equals(hand.get(3).getValue())
+					&& hand.get(2).getValue().equals(hand.get(4).getValue())
+					|| hand.get(2).getValue().equals(hand.get(0).getValue())
+							&& hand.get(2).getValue().equals(hand.get(1).getValue())
+							&& hand.get(2).getValue().equals(hand.get(3).getValue())) {
+
+				return "Four of a kind";
+			} else {
+
+				return "Full house";
+			}
+
+//			Om storleken på listan är 5 kan vi dra slutsatsen att den består av nedan beskrivna poker hands.
+//			Alternativet är också att handen inte har något värde alls = defaultvärdet.  
+
+//			Här använder vi oss av den lista som vi får av metoden sortHandAndRemoveDuplicates()
+//			Om värdet på plats 1, 2, 3, 4 stämmer överrens med det första värdet som adderas med 
+//			1, 2. 3 respektive 4 så är det en stege. Om dessutom alla suits stämmer överrens med 
+//			så är det en Straight flush. Och så vidare.
+
+		case 5:
+
+			int o = (int) s.get(0);
+
+			if (s.get(1).equals(o + 1) && s.get(2).equals(o + 2) && s.get(3).equals(o + 3) && s.get(4).equals(o + 4)
+					&& hand.get(0).getSuit() == hand.get(1).getSuit() && hand.get(0).getSuit() == hand.get(2).getSuit()
+					&& hand.get(0).getSuit() == hand.get(3).getSuit()
+					&& hand.get(0).getSuit() == hand.get(4).getSuit()) {
+
+				return "Straight flush";
+			} else if (s.get(1).equals(o + 1) && s.get(2).equals(o + 2) && s.get(3).equals(o + 3)
+					&& s.get(4).equals(o + 4)) {
+
+				return "Straight";
+			} else if (hand.get(0).getSuit() == hand.get(1).getSuit() && hand.get(0).getSuit() == hand.get(2).getSuit()
+					&& hand.get(0).getSuit() == hand.get(3).getSuit() && hand.get(0).getSuit() == hand.get(4).getSuit()
+					&& s.get(0).equals(1) && s.get(1).equals(10) && s.get(2).equals(11) && s.get(3).equals(12)
+					&& s.get(4).equals(13)) {
+
+				return "Royal flush";
+			} else if (hand.get(0).getSuit() == hand.get(1).getSuit() && hand.get(0).getSuit() == hand.get(2).getSuit()
+					&& hand.get(0).getSuit() == hand.get(3).getSuit()
+					&& hand.get(0).getSuit() == hand.get(4).getSuit()) {
+
+				return "Flush";
+			}
+
+		default:
+			return "No hand";
 		}
-		else if (triss) {
-			ecc1 = 3;
-		}
-		else if (fyrtal) {
-			ecc1 = 4;
-		}
-		else 
-			ecc1 = 0;
-		
-		return ecc1;
-	}
-	
-//	Exkludera kontrollerade kort och flytta över ej kontrollerade kort till newHand
-	
-	private int equalsTest2(ArrayList<Card> hand) {
-		int ecc2 = 0;
-		if (par) {
-			ecc2 = 2;
-		}
-		else if (triss) {
-			ecc2 = 3;
-		}
-		else
-			ecc2 = 0;
-		return ecc2;
-	}
-	
-	private String equalsResult() {
-		
-		int ecc1 = this.equalsTest1();
-		int ecc2 = this.equalsTest2();
-		
-		if (ecc1 == 2 && ecc2 == 0  ||  ecc1 == 0 && ecc2 == 2) {
-			return "Par";
-		}
-		else if (ecc1 == 2  &&  ecc2 == 2) {
-			return "Två par";
-		}
-		else if (ecc1 == 3 && ecc2 == 2  ||  ecc1 == 2 && ecc2 == 3) {
-			return "Kåk";
-		}
-		else if (ecc1 == 4) {
-			return "Fyrtal";
-		}
-		
-	}
-	
-	private boolean twoPair(ArrayList<Card> hand) {
-//		Two different pairs. 
-		
-		
-		return true;
+
 	}
 
-	
+//	Metoden tar hand listan som parameter och returnerar en sorterad arraylist med dubletter/tripletter etc borttagna. 
+	List<Integer> sortHandAndRemoveDuplicates(ArrayList<Card> hand) {
+
+//		Ett TreeSet av typen NavigableSet:
+		nSet = new TreeSet<>();
+
+//		En ArrayList av typen List:
+		aList = new ArrayList<>();
+
+//		Innehållet i hand läggs till i ett set. Den både sorterar dem i storleksordning (minsta värdet först).
+//		samt tar bort dubletter och tripletter. 
+//		Om inga dubletter finns så blir storleken densamma som från början.
+
+		for (int i = 0; i < hand.size(); i++) {
+			nSet.add(hand.get(i).getValue());
+		}
+
+//		Lägger till innehållet i nSet i aList som metoden sen returnerar. 
+		for (Integer i : nSet) {
+			aList.add(i);
+		}
+
+		return aList;
+
+	}
+
 	private boolean threeOfAKind(ArrayList<Card> hand) {
 //	Three cards of the same rank. 
 		return true;
 	}
-	
+
 	private boolean fourOfAKind(ArrayList<Card> hand) {
 //		Four cards of the same rank. 
 		return true;
 	}
-	
+
 	private boolean straight(ArrayList<Card> hand) {
-		
+
 //		Five cards in a sequence, but not of the same suit. 
 		return true;
 	}
-	
+
 	private boolean flush(ArrayList<Card> hand) {
-		
+
 //		Any five cards of the same suit, but not in a sequence. 
 		return true;
 	}
-	
+
 	private boolean fullHouse(ArrayList<Card> hand) {
 //		Three of a kind with a pair. 
 		return true;
 	}
 
-	
 	private boolean straightFlush(ArrayList<Card> hand) {
 //		Five cards in a sequence, all in the same suit. 
 		return true;
 	}
-	
+
 	private boolean royalFlush(ArrayList<Card> hand) {
 //		A, K, Q, J, 10, all the same suit. 
 		return true;
 	}
-	
-	
+//	Metoden returnerar true om paret har värdet 11 eller mer. 
+//	Först itererar den igenom handen till dess den kommer till de två korten 
+//	som liknar varandra. Därefter kollar den om värdet på de två korten är högre än 
+//	10 eller lika med 1 (ace). Om det stämmer så returneras true. Annars returneras false. 
+	boolean checkJacksOrBetterInPair(ArrayList<Card> hand) {
+
+		Collections.sort(hand);
+		int count = 1;
+
+		for (int i = 0; i < hand.size() - 1; i++) {
+
+			if (hand.get(i).getValue() == hand.get(count).getValue()) {
+
+				if (hand.get(count).getValue() >= 11 || hand.get(count).getValue() == 1) {
+
+					return true;
+				}
+				count++;
+			}
+		}
+		return false;
+	}
+
 }
