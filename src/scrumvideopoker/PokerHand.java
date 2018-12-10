@@ -8,8 +8,7 @@ import java.util.TreeSet;
 
 public class PokerHand {
 
-// En navigableSet tar både bort dubletter och sorterar innehållet.
-// Används i sortHand metoden.
+
 	NavigableSet<Integer> nSet;
 
 	List<Integer> aList;
@@ -69,24 +68,13 @@ public class PokerHand {
 		return true;
 	}
 
-//	
-//	private int equalsTest1(ArrayList<Card> hand) {
-//		int ecc1 = 0;
-//		if (par) {
-//			ecc1 = 2;
-//		}
-//		else if (triss) {
-//			ecc1 = 3;
-//		}
-//		else if (fyrtal) {
-//			ecc1 = 4;
-//		}
+
 
 	private String evaluateHand(ArrayList<Card> hand) {
 
 //		Här får vi en ny sorterad lista med och borttagna dubletter baserat på innehållet i arraylistan. 
 		List<Integer> s = sortHandAndRemoveDuplicates(hand);
-
+		
 //		Med hjälp av den nya listans storlek (s.size()) kan vi dra följande slutsats:
 //		Om 4 = 1par.
 //		Om 3 = triss eller 2 par. 
@@ -94,10 +82,9 @@ public class PokerHand {
 //		Om 5 = Inget av det ovan. = antingen no hand eller straight, straight flush eller royalFlush.
 //		Om ingen hand matchar returneras "No hand"
 
-		switch (s.size()) {
-
 //		Är storleken 4 så är det ett par det handlar om. 
 //		Här kollas också om värdet på paret är jacks or better med hjälp av metoden längst ner i klassen. 
+		switch(s.size()) {
 		case 4:
 
 			if (checkJacksOrBetterInPair(hand)) {
