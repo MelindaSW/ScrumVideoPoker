@@ -145,14 +145,14 @@ public class PokerHand {
 
 				int o = (int) s.get(0);
 				
-				if  (  s.get(1).equals(o + 1) 
-					&& s.get(2).equals(o + 2)
-					&& s.get(3).equals(o + 3) 
-					&& s.get(4).equals(o + 4)
-					&& hand.get(0).getSuit() == hand.get(1).getSuit() 
-					&& hand.get(0).getSuit() == hand.get(2).getSuit()
-					&& hand.get(0).getSuit() == hand.get(3).getSuit()
-				    && hand.get(0).getSuit() == hand.get(4).getSuit()) {
+				if      (  s.get(1).equals(o + 1) 
+						&& s.get(2).equals(o + 2)
+						&& s.get(3).equals(o + 3) 
+						&& s.get(4).equals(o + 4)
+						&& hand.get(0).getSuit() == hand.get(1).getSuit() 
+						&& hand.get(0).getSuit() == hand.get(2).getSuit()
+						&& hand.get(0).getSuit() == hand.get(3).getSuit()
+					    && hand.get(0).getSuit() == hand.get(4).getSuit()) {
 					
 					return "Straight flush";
 				}

@@ -6,11 +6,12 @@ public class Main_Videopoker {
 		
 		Deck d = new Deck();
 		Videopoker v = new Videopoker(); 
-//		Card c = new Card();
+		Card c = new Card();
+		PokerHand ph = new PokerHand();
 		
-		v.hand1.add(d.draw());
-
-		System.out.println(v.hand1.get(0).getSuit());
+//		v.hand1.add(d.draw());
+//
+//		System.out.println(v.hand1.get(0).getSuit());
 		//		System.out.println(d.deck.size());
 //		v.fillHand1();
 //		v.printHand1();
@@ -24,7 +25,8 @@ public class Main_Videopoker {
 //		System.out.println("Refilled hand: ");
 //		v.printHand2();
 		
-		
+
+		System.out.println(ph.nSet);
 		
 //		d.printDeck();
 	}
