@@ -23,7 +23,7 @@ public class Main_Videopoker {
 			while(!endGame) {
 //				Om man vill starta ett spel, skriv Y. För att avsluta, skriv q. Det spelar ingen roll om det är stor eller liten bokstav.
 				System.out.println("Start new game: Y, End game: Q");
-				input = sc.next();
+				input = sc.nextLine();
 				
 //				Om inputen inte stämmer med y eller q så utförs if satsen nedan och går in i loopen till dess att man skriver rätt.
 				if (!input.equalsIgnoreCase("Y") && !input.equalsIgnoreCase("Q")){
@@ -31,7 +31,7 @@ public class Main_Videopoker {
 					do{
 						
 						System.out.println("Wrong input, write Y or Q!\n");
-						input = sc.next();
+						input = sc.nextLine();
 					}
 					while (!input.equalsIgnoreCase("Y") && !input.equalsIgnoreCase("Q"));
 				
@@ -49,8 +49,6 @@ public class Main_Videopoker {
 						
 					System.out.println("\nWhich cards do you want to hold?");
 					
-					sc.nextLine();
-
 					v.holdAndDeal(sc.nextLine()); 
 					v.fillHand2();
 					v.printHand2();

@@ -35,6 +35,7 @@ public class VideopokerJUnitTestClass  {
 	@AfterEach
 	public void finishedTest(TestInfo testinfo) {
 		System.out.println("Finished: " + testinfo.getDisplayName());
+		System.out.println("---------------------------------------");
 	}
 	
 	@Test
@@ -105,6 +106,21 @@ public class VideopokerJUnitTestClass  {
 	
 	@Test
 	public void testIfStraight() {
+		
+
+		testArray.add(new Card(1, Suit.CLUBS));
+		testArray.add(new Card(13, Suit.DIAMONDS));
+		testArray.add(new Card(12, Suit.HEARTS));
+		testArray.add(new Card(11, Suit.CLUBS));
+		testArray.add(new Card(10, Suit.HEARTS));
+		
+		System.out.println(ph.getPokerHand(testArray));
+		assertEquals("Straight", ph.getPokerHand(testArray));
+		
+	}
+	
+	@Test
+	public void testIfStraightWithAceAsHighest() {
 		
 
 		testArray.add(new Card(6, Suit.CLUBS));

@@ -9,7 +9,7 @@ public class Videopoker {
 	ArrayList<Card> hand1 = new ArrayList<>();
 	ArrayList<Card> hand2 = new ArrayList<>();
 
-	Deck d = new Deck();
+	Deck d;
 
 	public void printHand1() {
 		for(int i = 0; i < hand1.size(); i++) {
@@ -25,6 +25,7 @@ public class Videopoker {
 	
 //	Lägger till 5 kort till starthanden
 	public void fillHand1() {
+		d = new Deck();
 		d.shuffle();
 		while (hand1.size() < 5)  {
 			hand1.add(d.draw());
@@ -32,7 +33,7 @@ public class Videopoker {
 	}
 
 	public void fillHand2() {
-		d.shuffle();
+//		d.shuffle();
 		while (hand2.size() < 5)  {
 			hand2.add(d.draw());
 		}
